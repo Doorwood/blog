@@ -40,6 +40,7 @@ class Node:
 
     def isLeaf(self):
         return not self.left.val and not self.right.val
+
     def isBlack(self):
         return self.color==BLACK
     def isRed(self):
@@ -151,7 +152,7 @@ class RBTree:
         self.deleteNode(node)
     # steps:
     #  1.BST commmon delete
-    #  2.double black check
+    #  2.fix double Black
     #
     def successorNode(self,node):
         if node.isLeaf():
@@ -296,7 +297,7 @@ class RBTree:
             return max(getHeight(node.left),getHeight(node.right))+1
         return getHeight(self.root)
 
-    def print_binary_tree(self):
+    def printTree(self):
         def traverse(node, level=0, label=''):
 
             if node.isNull():
