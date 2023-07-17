@@ -4,7 +4,9 @@ from math import inf
 
 class Graph:
     def __init__(self, n):
-        self.matrix = [[0] * n for i in range(n)]
+        self.matrix = [[inf] * n for i in range(n)]
+        for i in range(n):
+            self.matrix[i][i]=0
         self.edges = []
 
     def addEdge(self, src, dst, weight):
@@ -83,6 +85,18 @@ class Graph:
 
         for i in range(n):
             print("shortest to " + str(i) + " " + str(dis[i]))
+    def floydWarshall(self):
+        n = len(self.matrix)
+        dis = self.matrix[:]
+        for k in range(n):
+            for i in range(n):
+                for j in range(n):
+                    dis[i][j]=min(dis[i][j],dis[i][k]+dis[k][j])
+        for i in range(n):
+            print("src:"+str(i)+" shortest:")
+            for j in range(n):
+                print("shortest to " + str(j) + " " + str(dis[i][j]))
+
 
 
 
@@ -90,11 +104,11 @@ if __name__ == '__main__':
     # 1->2->3
     # 2->4->3
     graph = Graph(5)
-    graph.addEdge(0, 2, 1)
-    graph.addEdge(0, 1, 1)
-    graph.addEdge(1, 4, 1)
+    graph.addEdge(0, 2, 2)
+    graph.addEdge(0, 1, 4)
+    graph.addEdge(1, 4, 3)
     graph.addEdge(0, 3, 1)
-    graph.addEdge(3, 4, -1)
+    graph.addEdge(3, 4, 1)
     print(graph.dfs(0))
     print(graph.bfs(0))
-    graph.bellmanford(0)
+    graph.floydWarshall()
