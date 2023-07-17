@@ -5,9 +5,11 @@ from math import inf
 class Graph:
     def __init__(self, n):
         self.matrix = [[0] * n for i in range(n)]
+        self.edges = []
 
     def addEdge(self, src, dst, weight):
         self.matrix[src][dst] = weight
+        self.edges.append([src,dst,weight])
 
     def bfs(self, src):
         visited = set()
@@ -67,6 +69,21 @@ class Graph:
                         dis[i] = dis[minIdx] + self.matrix[minIdx][i]
         for i in range(n):
             print("shortest to " + str(i) + " " + str(dis[i]))
+    def bellmanford(self,src):
+        n=len(self.matrix)
+        dis = [inf]*n
+        dis[src]=0
+        for i in range(1,n):
+            for s,d,w in self.edges:
+                if dis[s]!=inf and dis[s]+w<dis[d]:
+                    dis[d]=dis[s]+w
+        for s,d,w in self.edges:
+            if dis[s]+w<dis[d]:
+                raise Exception("Ngative circle!")
+
+        for i in range(n):
+            print("shortest to " + str(i) + " " + str(dis[i]))
+
 
 
 if __name__ == '__main__':
@@ -77,7 +94,7 @@ if __name__ == '__main__':
     graph.addEdge(0, 1, 1)
     graph.addEdge(1, 4, 1)
     graph.addEdge(0, 3, 1)
-    graph.addEdge(3, 4, 1)
+    graph.addEdge(3, 4, -1)
     print(graph.dfs(0))
     print(graph.bfs(0))
-    graph.dijkstra(0)
+    graph.bellmanford(0)
