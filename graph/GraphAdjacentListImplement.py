@@ -38,11 +38,14 @@ class Graph:
                 visited.add(ne[1])
                 queue.append(ne[1])
         return ans
+    # Greedy Algorithm
+    # Choose the smallest way in each time
+
     def dijkstra(self,src):
-        pq = []
+        pq = [] # store current minest node
         pq.append([0,src])
         n = len(self.adjList)
-        dis=[inf] * n
+        dis=[inf] * n # record current distance
         dis[src]=0
         while pq:
             cur = heapq.heappop(pq)
