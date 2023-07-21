@@ -1,4 +1,3 @@
-# data_structure
-Self data structure implement
-# Tree
-- Red Black Tree
+# Welcome!
+Share the implement of the datastructure and algorithm.
+
