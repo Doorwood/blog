@@ -1,0 +1,18 @@
+from typing import List
+
+class BinaryIndexedTree:
+    def __init__(self,data) -> None:
+        self.table = [0]*len(da)
+    def lowbit(self,x):
+        return x&(-x)
+    def add(self,x,val):
+        n = len(self.table) 
+        while x<n:
+            self.table[n] += val
+            x += self.lowbit(x)
+    def construct(self,data:List[int]):
+        n=len(data)
+        for i in range(n):
+            self.add(i,data[i])
+            
+
